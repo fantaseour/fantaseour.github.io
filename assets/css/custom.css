@@ -92,11 +92,11 @@
   }
   
   .marquee ul .item:nth-child(even) {
-    transform: rotate(4deg);
+    transform: rotate(-4deg);
   }
   
   .marquee ul .item:nth-child(odd) {
-    transform: rotate(-4deg);
+    transform: rotate(4deg);
   }
   
   
