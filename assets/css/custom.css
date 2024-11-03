@@ -1,0 +1,221 @@
+@keyframes rotate-circle {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(-360deg);;
+    }
+  }
+  
+  @keyframes scale-circle {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);;
+    }
+  }
+  
+  .hero-section .hero-bg .circle-2 {
+    animation: 10s linear rotate-circle infinite;
+  }
+  
+  .hero-section .hero-bg .circle-1 {
+    animation: 10s ease-in-out scale-circle infinite;
+  }
+  
+  .animated-content {
+    background: linear-gradient(to top, black 50%, white 50%);
+    background-size: 100% 200%;
+    background-position: left top;
+    transition: all 0.3s ease-out;
+  }
+  
+  .animated-content:hover {
+    background-position: left bottom;
+  }
+  
+  
+  .animated-content .content {
+    transition: all 0.3s ease-out;
+  }
+  
+  
+  .animated-content:hover .content {
+    color: white;
+    padding-left: 20px;
+  }
+  
+  .animated-content:hover .content h4 {
+    color: white;
+  }
+  
+  .animated-content:hover .award-btn {
+    right: 10px;
+    color: white;
+  }
+  
+  .animated-content .award-btn i {
+    transition: all 0.3s ease-out;
+  }
+  
+  .animated-content:hover .award-btn i {
+    color: white;
+  }
+  
+  .animated-opacity-badge {
+    transition: all 0.3s ease-out;
+  }
+  
+  .animated-opacity-badge:hover {
+    opacity: 0.6;
+  }
+  
+  .card .card-overlay.fade-down  {
+    transition: all 1s ease-out;
+  }
+  
+  .card:hover .card-overlay.fade-down {
+    opacity: 1;
+  }
+  
+  .blog-item .card-content .title a {
+    transition: all 1s ease-out;
+  }
+  
+  
+  .blog-item:hover .card-content .title a {
+    background-size: 0 5%;
+  }
+  
+  .marquee ul .item:nth-child(even) {
+    transform: rotate(4deg);
+  }
+  
+  .marquee ul .item:nth-child(odd) {
+    transform: rotate(-4deg);
+  }
+  
+  
+  .marquee ul .item.fake-item {
+    margin: 0; 
+    padding: 0;
+    width: 0px; 
+    background: transparent;
+  }
+  
+  /* в основных стилях в ul gap заменен на margin, иначе не получается обмануть вечный скролл -- слипаются последний и первый элементы */
+  
+  /*
+  анимация лого через css и добавленный элемент
+  
+  .list-unstyled {
+    animation: marquee 10s linear infinite;
+  }
+  
+  
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-123%); }
+  }
+  */
+  
+  
+  /*
+  анимация точки под аунктами меню (не пригодилась, уже было наживлено
+  https://www.hendriklammers.com/notes/negate-css-variable
+  
+  .navbar-nav .nav-item:after {
+    content: "";
+    position: relative;
+    top: 48px;
+    background: #030712;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    left: calc((50%) * -1);
+    transform: scale(1);
+    transition: all 0.5s;
+  }
+  
+  
+  .navbar-nav .nav-item:hover:after {
+    transform: scale(1);
+  }
+  */
+  
+  header .navbar-expand .navbar-nav .nav-item .nav-link  {
+    transition: all 0.5s;
+  }
+  
+  header .navbar-expand .navbar-nav .nav-item .nav-link:hover  {
+    opacity: 0.6;
+  }
+  
+  header .navbar-expand .navbar-nav .nav-item .nav-link:after  {
+    transition: all 0.5s;
+  }
+  
+  header .navbar-expand .navbar-nav .nav-item .nav-link:hover:after  {
+    transform: scale(1);
+  }
+  
+  #my-cursor {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box;
+    border: 2px solid var(--secondary-p-color);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 1;
+    transform: scale(0);
+    z-index: 10;
+  }
+  
+  .my-modal {
+    transition: opacity 2s;
+  }
+  
+  .my-modal:before {
+      content: ""; 
+      background: rgba(0,0,0,.6);
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0; 
+      z-index: 10;
+  }
+  
+  
+  .my-modal-dialog {
+    position: fixed; 
+    color: white;
+    left: calc(50% - 70px); 
+    top: calc(50% - 70px); 
+    z-index: 11; 
+    width: 140px;
+  }
+  
+  
+  .my-modal-dialog svg {
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    display:inline-block;
+  }
+  
+  .main {
+    display: none;
+  }
+  
+  .swap-icon-1:hover .icon {
+    animation: swap ease-out var(--transition-duration);
+  }
+  
+  
+  
