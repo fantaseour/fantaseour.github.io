@@ -1,0 +1,138 @@
+https://jsfiddle.net/uncoke/6pqkts7a/
+https://discourse.threejs.org/t/cdn-to-load-fbx-in-a-simple-page/20799
+
+
+
+new url like
+https://cdn.jsdelivr.net/npm/three-fbx-loader@1.0.3/index.min.js
+
+--------------------------------------------
+maybe like this?
+https://stackoverflow.com/questions/71718881/threejs-fbxloader-import-via-cdn-not-working
+https://stackoverflow.com/questions/62183208/fbxloader-cdn-module-for-three-js
+
+
+var THREE = require('three');
+var FBXLoader = require('three-fbx-loader');
+ 
+var loader = new FBXLoader();
+ 
+var scene = new THREE.Scene();
+ 
+loader.load('./path/to/model.fbx', function (object3d) {
+  scene.add(object3d);
+});
+
+
+
+
+
+----------------------------------------------
+
+
+
+
+-----------------------
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r117/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r117/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/zlibjs@0.3.1/bin/zlib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r117/examples/js/loaders/FBXLoader.js"></script>
+-----------------------
+
+			const scene = new THREE.Scene();
+			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+			const clock = new THREE.Clock();
+
+			const renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			const geometry = new THREE.BoxGeometry();
+			const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+			const cube = new THREE.Mesh( geometry, material );
+       scene.add( cube );
+       
+			const controls = new THREE.OrbitControls( camera, renderer.domElement );
+      controls.screenSpacePanning = true;
+      controls.target.set(0, 1.1, 0);
+        
+			let mixer;
+      let modelMesh
+      
+			camera.position.x = 2;
+			camera.position.z = 5;
+      camera.position.y = 2;
+      addGrid(scene);
+      
+      const url = "https://threejs.org/examples/models/fbx/Samba Dancing.fbx";
+      
+      var loaderF = new THREE.FBXLoader();
+                    
+                    loaderF.load(
+                        url, function (fbx) {
+                            mixer = new THREE.AnimationMixer( fbx );
+                            const action = mixer.clipAction( fbx.animations[ 0 ] );
+                            console.log(fbx.animations[ 0 ])
+                            action.play();
+                            
+                            fbx.scale.set(.022,.022,.022);
+                            fbx.traverse( function ( child ) {
+
+                                if ( child.isMesh ) {
+                                    child.castShadow    = true;
+                                    child.receiveShadow = true;
+                                }
+
+                            } );
+														const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
+														hemiLight.position.set( 0, 200, 0 );
+														scene.add( hemiLight );
+        
+
+														const dirLight = new THREE.DirectionalLight( 0xffffff );
+														dirLight.position.set( 0, 200, 100 );
+														dirLight.castShadow = true;
+														dirLight.shadow.camera.top = 180;
+														dirLight.shadow.camera.bottom = - 100;
+														dirLight.shadow.camera.left = - 120;
+														dirLight.shadow.camera.right = 120;
+														scene.add( dirLight );
+                 
+                 						modelMesh = fbx.animations[ 0 ];
+														scene.add( fbx );
+
+                        }, function (e) {
+                            //vm.progress(a.type + " " + a.id, e.loaded, e.total, a.id);
+
+                        }, function (er) {
+                            console.log("Error loading animation")
+                            console.log(er.message)
+                        });
+                    
+			const animate = function () {
+				requestAnimationFrame( animate );
+
+				const delta = clock.getDelta();
+				if ( mixer ) mixer.update( delta );
+        
+				cube.rotation.x += 0.01;
+				cube.rotation.y += 0.01;
+        
+       //  controls.target.set(modelMesh.position.x, modelMesh.position.y + 1, modelMesh.position.z);
+			     controls.target.set(scene.position.x, scene.position.y + 1, scene.position.z);
+			//console.log(scene.position.x+ " "+scene.position.y+" "+scene.position.z)
+     
+				renderer.render( scene, camera );
+			};
+
+			
+      function addGrid(scene){
+       						var size = 10 * 1 || 10;
+                    var divisions = 10;
+                    var gridHelper = new THREE.GridHelper(size, divisions);
+                    scene.add(gridHelper);
+                    return scene
+      }
+
+			animate();
+-----------------------
